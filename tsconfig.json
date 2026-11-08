@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2025",                          /* Versão do JS gerada */
-    "module": "NodeNext",                        /* Módulos nativos do Node (ESM) */
-    "moduleResolution": "NodeNext",              /* Resolução de módulos compatível com ESM */
-    "rootDir": "./src",                          /* Onde ficam os códigos fonte (.ts) */
-    "outDir": "./dist",                          /* Onde fica o código compilado (.js) */
-    "strict": true,                              /* Checagem estrita de tipos */
-    "esModuleInterop": true,                     /* Compatibilidade com imports padrão */
-    "skipLibCheck": true,                        /* Pula checagem de bibliotecas de terceiros */
-    "sourceMap": true,                           /* Gera mapas para debugar o código fonte */
-    "resolveJsonModule": true                    /* Permite importar arquivos .json diretamente */
+    "target": "es2025",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*"]
 }
