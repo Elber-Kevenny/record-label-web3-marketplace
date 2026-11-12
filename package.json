@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx watch src/server/index.ts",
+    "dev": "npx tsx watch src/server/index.ts 3000",
     "dev:starter": "npx tsx watch src/server/index.ts",
     "test": "jest",
     "lint:prettier:check": "prettier --check .",
