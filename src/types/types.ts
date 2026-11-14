@@ -6,3 +6,11 @@ export interface MarketplaceNodeType {
   songs: Record<string, string>;
   broadcastSelf: () => void;
 }
+
+export interface BlockType {
+  timestemp: number;
+  transactions: Record<string, string>;
+  previousHash: string;
+  nextHash: null;
+  hash: string;
+}

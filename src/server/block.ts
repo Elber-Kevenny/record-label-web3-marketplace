@@ -1,7 +1,7 @@
-import { BlockType } from "../types/types.js";
+import { BlockTypeB } from "../types/types.js";
 import { createHash } from "crypto";
 
-class Block implements BlockType {
+class Block implements BlockTypeB {
   timestemp: number;
   transactions: Record<string, string>;
   previousHash: string;
