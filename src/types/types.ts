@@ -1,7 +1,7 @@
 export interface MarketplaceNodeType {
   url: string;
   peers: string[];
-  blockchain: string;
+  blockchain: BlockChainType;
   balance: number;
   songs: Record<string, string>;
   broadcastSelf: () => void;
