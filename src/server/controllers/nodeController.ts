@@ -31,8 +31,14 @@ export const syncBlockchain = async (
     chain,
     marketPlaceNode.blockchain.pendingTransactions,
   );
-  console.log(`Syncing blocks ${JSON.stringify(chain)}`)
+  console.log(`Syncing blocks ${JSON.stringify(chain)}`);
   reply
     .status(200)
     .send({ message: "blockchain synced", blockCount: chain.length });
+};
+
+export const payment = async (request: FastifyRequest, reply: FastifyReply) => {
+  const { price } = request.body;
+  marketPlaceNode.balance += price;
+  reply.send({ message: `New balance ${marketPlaceNode.balance}` });
 };

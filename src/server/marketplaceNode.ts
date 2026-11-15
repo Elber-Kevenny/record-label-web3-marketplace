@@ -68,6 +68,20 @@ export class MarketplaceNode implements MarketplaceNodeType {
       console.log(await this.mime());
     }
     await this.broadcastBlockchain();
-    return "Processed transaction"
+    return "Processed transaction";
+  }
+  async mine() {
+    const price = this.blockchain.miningReward;
+    const reward = new Transaction({
+      sender: this.peers[0],
+      recipient: this.url,
+      price,
+      transactionType: "MINE",
+    });
+
+    this.blockchain.pendingTransactions.push(reward);
+    await this.blockchain.mineBlock();
+    this.balance = price;
+    return "Mining complete";
   }
 }

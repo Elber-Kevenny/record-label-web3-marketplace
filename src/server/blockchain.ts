@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { BlockChainType } from "../types/types.js";
 import Block from "./block.js";
 
@@ -20,5 +21,23 @@ export class BlockChain implements BlockChainType {
 
   getLatestBlock() {
     return this.chain[this.chain.length - 1];
+  }
+
+  async mineBlock() {
+    const targetPrefix = "0".repeat(this.difficult);
+    let nonce = 0;
+    let hash = "";
+
+    while (hash.substring(0, this.difficult) !== targetPrefix) {
+      nonce++;
+      hash = createHash("sha256")
+        .update(JSON.stringify(this.chain) + nonce)
+        .digest("hex");
+    }
+    const previousBlock = this.getLatestBlock();
+    const newBlock = new Block(this.pendingTransactions, previousBlock.hash);
+    previousBlock.nextHash = newBlock.hash;
+    this.chain.push(newBlock);
+    this.pendingTransactions = [];
   }
 }
