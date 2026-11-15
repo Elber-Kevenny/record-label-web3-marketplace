@@ -25,6 +25,6 @@ try {
 export const initializeNode = () => {
   const URL = `http://localhost:${PORT}}`;
   const initialPeers = [`http://localhost:3000`];
-  const blockchain = new BlockChain() 
+  const blockchain = new BlockChain();
   marketPlaceNode = new MarketplaceNode(URL, initialPeers, blockchain);
 };
