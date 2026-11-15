@@ -13,4 +13,5 @@ export async function userRoutes(app: any, options: any) {
 
   app.post("/register-node", controller.register);
   app.post("/sync-peers", controller.synPeers);
+  app.post("sync-blockchain", controller.syncBlockchain)
 }
