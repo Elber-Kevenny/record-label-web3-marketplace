@@ -1,5 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { marketPlaceNode } from "../index.js";
+import { request } from "node:http";
+import { BlockChain } from "../blockchain.js";
 
 export const register = async (
   request: FastifyRequest,
@@ -18,4 +20,25 @@ export const synPeers = async (
   marketPlaceNode.peers = peers;
   console.log(`${marketPlaceNode} synced ${marketPlaceNode.peers}`);
   reply.status(200).send({ message: "Synced Peers" });
+};
+
+export const syncBlockchain = async (
+  request: FastifyRequest,
+  reply: FastifyReply,
+) => {
+  const { chain } = request.body;
+  marketPlaceNode.blockchain = new BlockChain(
+    chain,
+    marketPlaceNode.blockchain.pendingTransactions,
+  );
+  console.log(`Syncing blocks ${JSON.stringify(chain)}`);
+  reply
+    .status(200)
+    .send({ message: "blockchain synced", blockCount: chain.length });
+};
+
+export const payment = async (request: FastifyRequest, reply: FastifyReply) => {
+  const { price } = request.body;
+  marketPlaceNode.balance += price;
+  reply.send({ message: `New balance ${marketPlaceNode.balance}` });
 };

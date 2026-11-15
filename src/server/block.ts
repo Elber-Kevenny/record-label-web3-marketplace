@@ -1,15 +1,15 @@
-import { BlockTypeB } from "../types/types.js";
+import { BlockType } from "../types/types.js";
 import { createHash } from "crypto";
 
-class Block implements BlockTypeB {
+class Block implements BlockType {
   timestemp: number;
-  transactions: Record<string, string>;
+  transactions: string[] | [];
   previousHash: string;
   nextHash: null;
   hash: string;
 
 
-  constructor(transactions: Record<string, string>, previousHash: string) {
+  constructor(transactions: string[] | [], previousHash: string | null) {
     this.timestemp = Date.now();
     this.transactions = transactions;
     this.previousHash = previousHash;
