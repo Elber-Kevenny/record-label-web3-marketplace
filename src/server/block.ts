@@ -8,19 +8,20 @@ class Block implements BlockType {
   nextHash: null;
   hash: string;
 
-
   constructor(transactions: string[] | [], previousHash: string | null) {
     this.timestemp = Date.now();
     this.transactions = transactions;
     this.previousHash = previousHash;
     this.hash = this.calculateHash();
-    this.nextHash = null
+    this.nextHash = null;
   }
 
   calculateHash() {
-    return createHash('sha256').update(
-      this.previousHash + this.timestemp + JSON.stringify(this.transactions)
-    ).digest("hex")
+    return createHash("sha256")
+      .update(
+        this.previousHash + this.timestemp + JSON.stringify(this.transactions),
+      )
+      .digest("hex");
   }
 }
 
