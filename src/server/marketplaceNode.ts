@@ -1,12 +1,13 @@
 import axios from "axios";
 import { BlockChainType, MarketplaceNodeType } from "../types/types.js";
+import { Transaction } from "./transaction.js";
 
 export class MarketplaceNode implements MarketplaceNodeType {
   url: string;
   peers: string[];
   blockchain: BlockChainType;
   balance: number;
-  songs: Record<string, string>;
+  songs: Record<string, any>;
 
   constructor(url: string, peers: string[] = [], blockchain: BlockChainType) {
     this.url = url;
@@ -65,7 +66,7 @@ export class MarketplaceNode implements MarketplaceNodeType {
     this.songs[id] = transaction;
     this.blockchain.pendingTransactions.push(transaction);
     if (this.blockchain.pendingTransactions.length > 4) {
-      console.log(await this.mime());
+      console.log(await this.mine());
     }
     await this.broadcastBlockchain();
     return "Processed transaction";
@@ -83,5 +84,10 @@ export class MarketplaceNode implements MarketplaceNodeType {
     await this.blockchain.mineBlock();
     this.balance = price;
     return "Mining complete";
+  }
+  availableSongs() {
+    return Object.values(this.songs)
+      .filter((transaction) => transaction.type === "SELL")
+      .map(({ id, songTitle, price }) => [id, songTitle, price]);
   }
 }

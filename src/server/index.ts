@@ -1,15 +1,14 @@
 import Fastify from "fastify";
 import { userRoutes } from "./routes/fastifyRoutes.js";
-import { MarketplaceNode } from "./marketplaceNode.js";
-import { BlockChain } from "./blockchain.js";
+import { initializeNode } from "./controllers/nodeController.js";
 
 const fastify = Fastify();
 
-export let marketPlaceNode: MarketplaceNode;
+
 
 fastify.register(userRoutes, { prefix: "/api" });
 
-let [PORT] = process.argv.slice(2);
+export let [PORT] = process.argv.slice(2);
 PORT = PORT || 0;
 
 try {
@@ -22,9 +21,5 @@ try {
   process.exit(1);
 }
 
-export const initializeNode = () => {
-  const URL = `http://localhost:${PORT}}`;
-  const initialPeers = [`http://localhost:3000`];
-  const blockchain = new BlockChain();
-  marketPlaceNode = new MarketplaceNode(URL, initialPeers, blockchain);
-};
+initializeNode()
+
